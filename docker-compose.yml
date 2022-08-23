@@ -1,10 +1,29 @@
 version: '3.3'
 
 services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "${POSTGRES_HOST_PORT} : ${POSTGRES_CONTAINER_PORT}" # "5433 : 5432"
+    environment:
+      POSTGRES_DB : ${POSTGRES_DB}
+      POSTGRES_USER : ${POSTGRES_USER}
+      POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
+    volumes:
+      - "dbdata:/var/lib/postgresql/data"
+
   web:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    restart: always
+    command: python manage.py runserver 0.0.0.0:8080
     volumes:
       - .:/app
     ports:
-      - "8000:8000"
+      - ${DJANGO_SERVER_PORT}:${DJANGO_SERVER__PORT} # "8000 : 8000"
+    depends_on:
+      - db
+
+volumes:
+  dbdata:
+    driver: local

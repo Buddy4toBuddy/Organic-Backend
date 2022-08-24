@@ -5,5 +5,8 @@ RUN mkdir /app
 WORKDIR /app
 COPY requirements.txt /app/
 RUN pip install -r requirements.txt
-COPY . /app/
-EXPOSE 8080
+# Copy the source from the current directory to the Working Directory inside the container
+COPY . /app/ 
+EXPOSE 9000
+# Run the executable
+CMD ["python", "manage.py", "runserver", "0.0.0.0:9000"]

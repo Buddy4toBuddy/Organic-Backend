@@ -29,8 +29,8 @@ schema_view = swagger_get_schema_view(
 )
 
 urlpatterns = [
-    path('swagger/schema/', schema_view.with_ui('swagger', cache_timeout=0), name="swagger-schema"),
+    path('swagger/schema/', schema_view.with_ui('swagger', cache_timeout=0), name="swagger-schema"), 
     path('admin/', admin.site.urls),
     path('hello', include('organic.urls'))
-
+    
 ]

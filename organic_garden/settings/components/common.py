@@ -16,9 +16,6 @@ https://docs.djangoproject.com/en/3.1/ref/settings/"""
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-from cmath import e
-
-
 SECRET_KEY = 'xyi8=fl%lerwjt0-^af@w2s=8d@)#+h22&48cuvn9k(p@m#l7c'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -38,12 +35,10 @@ THIRD_PARTY_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    #'rest_framework_simplejwt',
-
 ]
 LOCAL_APPS = [
     # Main Apps
-    'organic',
+    'organic',    
 ]
 
 

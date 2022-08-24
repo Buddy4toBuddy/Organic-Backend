@@ -18,7 +18,7 @@ services:
       context: .
       dockerfile: Dockerfile
     restart: always
-    command: python manage.py runserver 0.0.0.0:8080
+    command: python manage.py runserver 0.0.0.0:9000
     volumes:
       - .:/app
     ports:

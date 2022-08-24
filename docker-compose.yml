@@ -5,22 +5,24 @@ services:
     image: postgres
     restart: always
     ports:
-      - "${POSTGRES_HOST_PORT} : ${POSTGRES_CONTAINER_PORT}" # "5433 : 5432"
+      - "${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}" # "5433 : 5432"
     environment:
-      POSTGRES_DB : ${POSTGRES_DB}
-      POSTGRES_USER : ${POSTGRES_USER}
-      POSTGRES_PASSWORD : ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - "dbdata:/var/lib/postgresql/data"
 
   web:
-    build: .
+    build: 
+      context: .  # Use an image built from the specified dockerfile in the current
+      dockerfile: Dockerfile
     restart: always
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python manage.py runserver 0.0.0.0:9000
     volumes:
       - .:/app
     ports:
-      - ${DJANGO_SERVER_PORT}:${DJANGO_SERVER__PORT} # "8000 : 8000"
+      - "${DJANGO_SERVER_PORT}:${DJANGO_SERVER_PORT}"  
     depends_on:
       - db
 

@@ -9,17 +9,32 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/"""
 
+import os
+from pathlib import Path
+from django.contrib.messages import constants as messages
+import environ
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False),
+    APP_NAME=(str, 'pelocal_b2b_backend'),
+    POSTGRES_PORT=(int, 5432),
+    RABBITMQ_PORT=(int, 5672),
+)
+# reading .env file
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'xyi8=fl%lerwjt0-^af@w2s=8d@)#+h22&48cuvn9k(p@m#l7c'
+SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,7 +53,7 @@ THIRD_PARTY_APPS = [
 ]
 LOCAL_APPS = [
     # Main Apps
-    'organic',    
+   'apps.organic',    
 ]
 
 
@@ -113,4 +128,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
 STATIC_URL = '/static/'
+APPEND_SLASH = False
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
+# Swagger Settings
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        },
+    },
+}

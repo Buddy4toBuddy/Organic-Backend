@@ -1,0 +1,24 @@
+# local.py is only for local development override
+
+.env
+venv/
+.DS_Store
+.idea/
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+**/__pycache__/
+**/*.pyc
+*.py[cod]
+
+# Distribution / packaging
+.Python
+build/
+
+# Django stuff:
+*.sqlite3
+
+
+organic_garden/__pycache__/urls.cpython-38.pyc
+organic_garden/__pycache__/urls.cpython-38.pyc

@@ -20,12 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 env = environ.Env(
     # set casting, default value
     DEBUG=(bool, False),
-    APP_NAME=(str, 'pelocal_b2b_backend'),
+    APP_NAME=(str, 'Organic-Garden'),
     POSTGRES_PORT=(int, 5432),
     RABBITMQ_PORT=(int, 5672),
 )
 # reading .env file
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -54,6 +55,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     # Main Apps
    'apps.organic',    
+    'organic',    
 ]
 
 
